@@ -20,13 +20,6 @@ http://localhost:9010/calculatorapi/v1/squareroot/225
 
 http://localhost:9010/calculatorapi/v1/min-max
 
-# How to enable lombok properties?
-1. Add lombok dependency into pom.xml.
-2. To activate lombok go to 
-* [Lombok site](https://projectlombok.org/)
- 
-this site then Download lombok jar and run it
-
 
 
 # Swagger URL :
