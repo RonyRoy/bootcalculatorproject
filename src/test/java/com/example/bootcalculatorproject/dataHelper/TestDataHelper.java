@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.bootcalculatorproject.dto.MinMaxRequest;
+import com.example.bootcalculatorproject.jpa.RequestResponseEntity;
 
 public class TestDataHelper {
 	private TestDataHelper() {
@@ -22,5 +23,15 @@ public class TestDataHelper {
 		MinMaxRequest minMaxRequest = new MinMaxRequest();
 		minMaxRequest.setNumbers(numList);
 		return minMaxRequest;
+	}
+
+	public static RequestResponseEntity getRequestResponseEntity() {
+		RequestResponseEntity requestResponseEntity = new RequestResponseEntity();
+		requestResponseEntity.setId(1l);
+		requestResponseEntity.setOperation("Service");
+		requestResponseEntity.setRequest("Request");
+		requestResponseEntity.setResponse("22.0");
+		requestResponseEntity.setSqlTimestamp(12345L);
+		return requestResponseEntity;
 	}
 }

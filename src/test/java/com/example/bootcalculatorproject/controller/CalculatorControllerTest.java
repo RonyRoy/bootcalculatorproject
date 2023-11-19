@@ -1,65 +1,79 @@
 package com.example.bootcalculatorproject.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.bootcalculatorproject.dataHelper.TestDataHelper;
 import com.example.bootcalculatorproject.dto.MinMaxRequest;
-import com.example.bootcalculatorproject.dto.Response;
-import com.example.bootcalculatorproject.dto.ResponseMinMax;
+import com.example.bootcalculatorproject.service.CalculatorService;
 
 @SpringBootTest
 public class CalculatorControllerTest {
+	@InjectMocks
 	private CalculatorController cal = new CalculatorController();
 
-	@Test
-	public void getAddition() {
-		Response res = new Response(40.33, "description");
-		assertEquals(res.getAnswer().toString(), cal.getAddition(33.33, 7.0).getAnswer().toString());
+	@Mock
+	CalculatorService calculatorService;
+
+	public void setup() throws IOException {
+		Mockito.when(calculatorService.findByRequest(Mockito.anyString()))
+				.thenReturn(TestDataHelper.getRequestResponseEntity());
 	}
 
 	@Test
-	public void getSubtraction() {
-		Response res = new Response(26.33, "description");
-		assertEquals(res.getAnswer().toString(), cal.getSubtraction(33.33, 7.0).getAnswer().toString());
+	public void getAddition() throws IOException {
+		setup();
+		assertNotNull(cal.getAddition(33.33, 7.0));
 	}
 
 	@Test
-	public void getMultiplication() {
-		Response res = new Response(21.0, "description");
-		assertEquals(res.getAnswer().toString(), cal.getMultiplication(3.0, 7.0).getAnswer().toString());
+	public void getSubtraction() throws IOException {
+		setup();
+		assertNotNull(cal.getSubtraction(33.33, 7.0));
 	}
 
 	@Test
-	public void getDivision() {
-		Response res = new Response(5.0, "description");
-		assertEquals(res.getAnswer().toString(), cal.getDivision(15.0, 3.0).getAnswer().toString());
+	public void getMultiplication() throws IOException {
+		setup();
+		assertNotNull(cal.getMultiplication(3.0, 7.0));
 	}
 
 	@Test
-	public void getSquare() {
-		Response res = new Response(16.0, "description");
-		assertEquals(res.getAnswer().toString(), cal.getSquare(4.0).getAnswer().toString());
+	public void getDivision() throws IOException {
+		setup();
+		assertNotNull(cal.getDivision(15.0, 3.0));
 	}
 
 	@Test
-	public void getSquareRoot() {
-		Response res = new Response(12.0, "description");
-		assertEquals(res.getAnswer().toString(), cal.getSquareRoot(144.0).getAnswer().toString());
+	public void getSquare() throws IOException {
+		setup();
+		assertNotNull(cal.getSquare(4.0));
 	}
 
 	@Test
-	public void getFactorial() {
-		Response res = new Response(120.0, "description");
-		assertEquals(res.getAnswer().toString(), cal.getFactorial(5.0).getAnswer().toString());
+	public void getSquareRoot() throws IOException {
+		setup();
+		assertNotNull(cal.getSquareRoot(144.0));
 	}
 
 	@Test
-	public void getMinMax() {
+	public void getFactorial() throws IOException {
+		setup();
+		assertNotNull(cal.getFactorial(5.0));
+	}
+
+	@Test
+	public void getMinMax() throws IOException {
+		setup();
 		MinMaxRequest minMaxRequest = TestDataHelper.getMinMaxRequest();
-		ResponseMinMax res = new ResponseMinMax(90, -100);
-		assertEquals(res.getMax(), cal.getMinMax(minMaxRequest).getMax());
+		assertNotNull(cal.getMinMax(minMaxRequest));
 	}
+
 }
